@@ -1,0 +1,25 @@
+2) ls -lt
+3) ls -lrt
+4) ls --help
+5) cd ~
+6) cat .profile
+7) uname –r
+8) uname –a
+9) uname -n
+10) uname -o
+11) uname -p
+12) arch
+13)touch nfact.c
+14)ls–l nfact.c
+15) chmod +x nfact.c
+16)ls–l nfact.c
+17) cat nfact.c
+18) history
+19) history 25
+20) df
+21) df –h
+22) top
+23)ps –la
+24)ps –ef
+25)ps –ejH
+26) cat /proc/cpuinfo | more
