@@ -1,0 +1,36 @@
+91) gives all files in current directory with extension .o and its informaiton
+92) gives all files current directory with extension .c and its information
+93) gives all files current directory with extension .sh and its inforamtion
+94) gives all files in current directory with its information
+95) show content of given file
+96) first takes 14 lines from begginning as content and shows 1 line from the end of taken content from file
+97) delete 1st row from core4info, -i means insertion
+98) shows content of core4info
+99) delete the last row from core4info file
+100) shows content of core4info file
+101) prints 13 line of core4info
+102) prins byte count in 13th line
+103) prints word count in 13th line
+104) prints revese version of 13th line
+105) prints from 13th to 18th the line
+106) prints new line counts from 13th to 18the line
+107) prints word count from 13th line to 18th line
+108) prints byte count fro 13th line to 18th line
+109) prints the last row of the core4info file
+110) the first it takes revese string, then split by delimeter and takes the first word, then prints revese version of this word
+111) the first it splits string by the delitmeter and prints the 4th element taken array
+112) prints 4th element from every row
+113) prints 4th and 6th elements from every row
+114) prints from 1st to 7th element in every row
+115) prints from beginning till 6th element from every row
+116) prints from 10th till end of every row
+117) ~~~it gives error~~~
+118) prints 2nd element of array which is taken from splitting by delimeter from each row(new line)
+119) prints from 1st till 2nd element of an array which is taken from splitting by delimeter from each row
+120) the same as 118
+121) prints 2nd and 3rd element of an array which is taken by splitting by delimeter from each row
+122) prints from 1st till 3rd element of an array which is taken by splitting by delimeter from each row
+123) prints from beginnging till 3rd element of an array which is taken by splitting by delimeter from each row
+124) prints from 2nd till end of an array which is taken by splitting by delimeter from each row
+125) 
+ 
