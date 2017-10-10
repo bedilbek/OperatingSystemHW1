@@ -32,5 +32,59 @@
 122) prints from 1st till 3rd element of an array which is taken by splitting by delimeter from each row
 123) prints from beginnging till 3rd element of an array which is taken by splitting by delimeter from each row
 124) prints from 2nd till end of an array which is taken by splitting by delimeter from each row
-125) 
- 
+125) prints 1st element of an array which is splitted by delimeter ':' of every row
+126) prints 2nd and 3rd element of an array which is splitted by delimeter of every row, putting delimeter di separate elements
+127) copy file /etc/passwd to current directory with filename as password
+128) prints content of password file
+129) should print 1st element of an array splitting by delimeter, but as there is no delimenter ' ', it prints the whole content
+130) as delimenter ' ' it takes every row and prints characters from 1st to 10th
+131) it revers the content and shows 1st element of an array which is spleetted by delimeter
+132) prints characters from 10th till 50th character of reverse content of file
+133) prints the lines where it contains word CHOICE in select.sh file
+134) prints the lines where it contains word 'echo' in case.sh file
+135) prints every new line which starts with small letters (it is given as regex) in file
+136) prints every new line which starts with capital letters (as given in regex) in file
+137) prints every new line which starts numbers (as given in regex) in file
+138) prints every new line which starts with space ' ' in file
+139) reads every file recursively and find line exact maches with given string 'esac', then prints filename and line
+140) prints files which does not contain string 'esac' in current directory
+141) prints files which contains the string 'file' in current directory
+142) prints files and lines which matches with string 'esac'
+143) print files with any name with any extension and lines which matches with string 'esac'
+144) prints files with any name with any extension and lines which matches with string 'case'
+145) prints files with any name with any extension and lines with line number which matches with string 'case'
+146) prints only matched lines with string 'case' in case.sh file
+147) prints line number and matched line with string 'esac' in case.sh file
+148) prints line number and matched line with string 'case' in case.sh file
+149) prints line which matched with string 'case' in case.sh file
+150) prints line which matched with string 'echo' in case.sh file
+151) 1st it takes echo matched lines and prints count of lines
+152) prints byte offset of matched string 'case' in file case.sh
+153) prints only matched results with line number and byte offset in file case.sh
+154) prints byte offset, line number with full line which matched with string 'case'
+155) prints byte offset for every match
+156) prints only matches with byte offset and line number in file case.sh
+157) prints byteoffset, line number of matched string with full line
+158) prints byte offset of matched string
+159) prints matched string line and line number
+160) prints lines which starts with 'case' string in case.sh file
+161) prints lines which ends with string 'OK' in case.sh file
+162) prints lines which ends with string 'ne' in case.sh file
+163) prints lines which ends with character ':' in case.sh file
+164) prints lines which starts with 'while' string in case.sh file
+165) prints lines which starts with 'echo' string in case.sh file
+166) prints lines which does not match with string 'echo' in case.sh file
+167) prints lines which does not start with string 'echo' in case.sh file
+168) prints lines which does not start with string 'while' in case.sh file
+169) prints count of matches 'case' string in case.sh file
+170) prinst count of matches 'echo' string in case.sh file
+171) prints count of matches 'unix' string in file.txt file
+172) print lines which matches with string 'read' in case.sh file
+173) prints only matched with string 'read' as regex in file case.sh
+174) prints line countes of matched string 'read' in case.sh
+175) append next strings which ends with command+D to part2q file
+176) prints 3rd line of part2q file
+177) prints matched words on 3rd line
+178) prints count of matched words on 3rd line
+179) prints 1st line of part2q file
+180) prints count of matched words on 1st line
