@@ -23,7 +23,7 @@ To install linux source first we should update package list by executing command
 
 
 
-[Screenshot_3_a_1]
+	[Screenshot_3_a_1]
 
 
 
@@ -31,7 +31,7 @@ After updating we can start  installing linux source. To do it, we execute “su
 
 
 
-[Screenshot_3_a_2]
+	[Screenshot_3_a_2]
 
 
 
@@ -49,9 +49,9 @@ The program extracts all linux source archive located in “usr/src/linux-source
 
 
 
-[Screenshot_3_a_3]
+	[Screenshot_3_a_3]
 
-[Screenshot_3_a_4]
+	[Screenshot_3_a_4]
 
 
 
@@ -85,7 +85,7 @@ Here are screenshots of commands:
 
 Here are compilation steps screenshots:
 
-[Screenshot_4a_1] ~ [Screenshot_4a_16]
+	[Screenshot_4a_1] ~ [Screenshot_4a_16]
 
 
 
@@ -93,31 +93,19 @@ Here are compilation steps screenshots:
 
 In order to compile installed linux source we need first install “libncurses5” and “libncurses5-dev”. “libncurses5” this package contains the shared libraries necessary to run programs compiled with ncurses. “libncurses5-dev” this package contains the header files, static libraries and symbolic links that developers using ncurses will need. To do this you need to execute “$sudo apt-get install libncurses5 libncurses5-dev”.
 
-[Screenshot_4a_1]
+	[Screenshot_4a_1]
 
 After we need to configure linux source, in which we can choose which features to include in our source. To do this “make menuconfig” is executed. It is a menu-driven user interface, allows the user to choose the features of Linux (and other options) that will be compiled. After configuring source we will save it. For simplicity here I left default options. Then packages list is updated by “$sudo apt-get update”.
 
 
-
-[Screenshot_4a_2]
-
-[Screenshot_4a_3]
-
-[Screenshot_4a_4]
-
-[Screenshot_4a_5]
-
-[Screenshot_4a_6]
-
-[Screenshot_4a_7]
-
+	[Screenshot_4a_2] ~ [Screenshot_4a7]
 
 
 The next step is to install “libssl-dev” package which contains development libraries, header files, and manpages for libssl and libcrypto. This package is part of the OpenSSL project's implementation of the SSL and TLS cryptographic protocols for secure communication over the Internet. It is done by using “$sudo apt-get install libssl-dev”.
 
 
 
-[Screenshot_4a_8]
+	[Screenshot_4a_8]
 
 
 
@@ -125,7 +113,7 @@ The final step before compilation is to execute “$make clean” comman. “$ma
 
 
 
-[Screenshot_4a_9]
+	[Screenshot_4a_9]
 
 
 
@@ -133,7 +121,7 @@ The final step is to compile and install kernel and modules using “$make deb-p
 
 
 
-[Screenshot_4a_10] ~ [Screenshot_4a_16]
+	[Screenshot_4a_10] ~ [Screenshot_4a_16]
 
 
 
@@ -143,6 +131,6 @@ To test you will install compiled “.deb” files from source with “$dpkg -i 
 
 
 
-[Screenshot_4c_1]
+	[Screenshot_4c_1]
 
-[Screenshot_4c_2]
+	[Screenshot_4c_2]
