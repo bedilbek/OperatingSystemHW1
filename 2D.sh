@@ -11,9 +11,11 @@ then
 		echo $FILENAME is a regular file 
 	fi	
 
-	if [! -s $FILENAME ] 
+	if [ -s $FILENAME ] 
 	then
-		echo $FILENAME is an empty file 
+		echo $FILENAME is not an empty file 
+	else
+		echo $FILENAME is an empty file
 	fi	
 
 	if [ -d $FILENAME ] 
