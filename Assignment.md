@@ -59,12 +59,102 @@ ps -la – list the running processes in long format and including those with na
 #### C.
 ### PART2
 #### A.
+91) gives all files in current directory with extension .o and its informaiton
+92) gives all files current directory with extension .c and its information
+93) gives all files current directory with extension .sh and its inforamtion
+94) gives all files in current directory with its information
+95) show content of given file
+96) first takes 14 lines from begginning as content and shows 1 line from the end of taken content from file
+97) delete 1st row from core4info, -i means insertion
+98) shows content of core4info
+99) delete the last row from core4info file
+100) shows content of core4info file
+101) prints 13 line of core4info
+102) prins byte count in 13th line
+103) prints word count in 13th line
+104) prints revese version of 13th line
+105) prints from 13th to 18th the line
+106) prints new line counts from 13th to 18the line
+107) prints word count from 13th line to 18th line
+108) prints byte count fro 13th line to 18th line
+109) prints the last row of the core4info file
+110) the first it takes revese string, then split by delimeter and takes the first word, then prints revese version of this word
+111) the first it splits string by the delitmeter and prints the 4th element taken array
+112) prints 4th element from every row
+113) prints 4th and 6th elements from every row
+114) prints from 1st to 7th element in every row
+115) prints from beginning till 6th element from every row
+116) prints from 10th till end of every row
+117) ~~~it gives error~~~
+118) prints 2nd element of array which is taken from splitting by delimeter from each row(new line)
+119) prints from 1st till 2nd element of an array which is taken from splitting by delimeter from each row
+120) the same as 118
+121) prints 2nd and 3rd element of an array which is taken by splitting by delimeter from each row
+122) prints from 1st till 3rd element of an array which is taken by splitting by delimeter from each row
+123) prints from beginnging till 3rd element of an array which is taken by splitting by delimeter from each row
+124) prints from 2nd till end of an array which is taken by splitting by delimeter from each row
+125) prints 1st element of an array which is splitted by delimeter ':' of every row
+126) prints 2nd and 3rd element of an array which is splitted by delimeter of every row, putting delimeter di separate elements
+127) copy file /etc/passwd to current directory with filename as password
+128) prints content of password file
+129) should print 1st element of an array splitting by delimeter, but as there is no delimenter ' ', it prints the whole content
+130) as delimenter ' ' it takes every row and prints characters from 1st to 10th
+131) it revers the content and shows 1st element of an array which is spleetted by delimeter
+132) prints characters from 10th till 50th character of reverse content of file
+133) prints the lines where it contains word CHOICE in select.sh file
+134) prints the lines where it contains word 'echo' in case.sh file
+135) prints every new line which starts with small letters (it is given as regex) in file
+136) prints every new line which starts with capital letters (as given in regex) in file
+137) prints every new line which starts numbers (as given in regex) in file
+138) prints every new line which starts with space ' ' in file
+139) reads every file recursively and find line exact maches with given string 'esac', then prints filename and line
+140) prints files which does not contain string 'esac' in current directory
+141) prints files which contains the string 'file' in current directory
+142) prints files and lines which matches with string 'esac'
+143) print files with any name with any extension and lines which matches with string 'esac'
+144) prints files with any name with any extension and lines which matches with string 'case'
+145) prints files with any name with any extension and lines with line number which matches with string 'case'
+146) prints only matched lines with string 'case' in case.sh file
+147) prints line number and matched line with string 'esac' in case.sh file
+148) prints line number and matched line with string 'case' in case.sh file
+149) prints line which matched with string 'case' in case.sh file
+150) prints line which matched with string 'echo' in case.sh file
+151) 1st it takes echo matched lines and prints count of lines
+152) prints byte offset of matched string 'case' in file case.sh
+153) prints only matched results with line number and byte offset in file case.sh
+154) prints byte offset, line number with full line which matched with string 'case'
+155) prints byte offset for every match
+156) prints only matches with byte offset and line number in file case.sh
+157) prints byteoffset, line number of matched string with full line
+158) prints byte offset of matched string
+159) prints matched string line and line number
+160) prints lines which starts with 'case' string in case.sh file
+161) prints lines which ends with string 'OK' in case.sh file
+162) prints lines which ends with string 'ne' in case.sh file
+163) prints lines which ends with character ':' in case.sh file
+164) prints lines which starts with 'while' string in case.sh file
+165) prints lines which starts with 'echo' string in case.sh file
+166) prints lines which does not match with string 'echo' in case.sh file
+167) prints lines which does not start with string 'echo' in case.sh file
+168) prints lines which does not start with string 'while' in case.sh file
+169) prints count of matches 'case' string in case.sh file
+170) prinst count of matches 'echo' string in case.sh file
+171) prints count of matches 'unix' string in file.txt file
+172) print lines which matches with string 'read' in case.sh file
+173) prints only matched with string 'read' as regex in file case.sh
+174) prints line countes of matched string 'read' in case.sh
+175) append next strings which ends with command+D to part2q file
+176) prints 3rd line of part2q file
+177) prints matched words on 3rd line
+178) prints count of matched words on 3rd line
+179) prints 1st line of part2q file
+180) prints count of matched words on 1st line
 181) sed --n '1 p' part2q | grep -o "the" | wc -l - shows how many the word "the" have in first line in file part2q
 182) sed 's/the/THE/' part2q - replace "the" to "THE" in each line of file part2q, however it will replace only first occurence in each line
 183) sed 's/THE/the/g' - globally replace "THE" to "the" in file part2q
 184) sed 's/the/THE/2' - replace second occurence "the" to "THE" in file part2q
 185) sed 's/the/THE/3' - replace third occurence "the" to "THE" in file part2q
-186) sed 's/the/{&}/' part2q - replace all "the" to "{the}" in file part2q, in another words put "the" into brackets "{}", however it will replace only first occurence in each line
+186) sed 's/the/{&}/' part2q - replace the first occurrence "the" to "{the}" in each line of file part2q, in another words put "the" into brackets "{}", however it will replace only first occurence in each line
 187) sed 's/the/THE/p' part2q - replace "the" to "THE" in each line of file part2q and print every line after original to show changes
 188) sed --n 's/the/THE/p' part2q - replace "the" to "THE" in each line of file part2q and print only changed lines after original
 189) sed 's/the/THE/' part2q | sed 's/commands/instructions/' part2q - replace "the" to "THE" then "commands" to "instructions" in each line of file part2q, however it will replace only first occurence in each line
