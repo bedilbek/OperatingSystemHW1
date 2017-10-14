@@ -56,7 +56,333 @@ ps -la – list the running processes in long format and including those with na
 49. sed – stream editor; find and/or replace based on regular expressions
 50. uptime – show the time the system is up
 #### B.
+/* Program using UNIX I/O primitives to perform file operations */
+/*FileName: file_oper.c*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+
+#define DEF_MODE S_IRUSR|S_IWUSR|S_IXUSR|S_IRGRP|S_IWGRP|S_IXGRP|S_IROTH
+ /*
+defining the permissions of the created file
+*/
+
+int main() 
+{
+	/*
+		int fd 
+		int fd1
+		int len
+		int i
+		int fsize
+		int nbytes
+
+		char ch - to store temporary char
+		char cf
+		char buf[512] - to store file content 
+		char fname[25] - to store a file name
+		char cname[25] - to store second file name
+	*/
+	int fd, fd1, len, i, fsize, nbytes;
+	char ch=0, cf, buf[512], fname[25], cname[25];
+
+	
+	/*
+		File creation
+	*/
+	printf("CREATING A NEW FILE WITH ALL ACCESS RIGHTS TO USER AND GROUP AND EXECUTE ACCESS TO OTHERS\n");
+	
+	printf("ENTER FILE NAME : ");
+	scanf("%s", fname);
+	
+	fd = open(fname, O_CREAT|O_TRUNC|O_WRONLY|O_APPEND, DEF_MODE);
+/*
+definition of function open() ====> open(const char*file_name, int oflags, mode_t mode)
+oflags ==>> defines the method(s) in which the file should be opened. Method_flags can be separated by BITWISE OR |, if many.
+mode ==>> defines the permissions of the file when created, can be separated by BITWISE OR, if many.
+O_CREAT => create the file, if doesn't exist and 3rd parameter must be present
+O_TRUNC ==> Initially clear all data from the file. It means even the file exists, data in it will be erased.
+O_WRONLY ==> The file is for write only.
+O_APPEND  ==>  Append new information to the end of the file
+
+*/
+	
+	if (fd < 0)
+	{
+		printf("cannot create FILE %s \n", fname);
+	}	
+	else
+	{
+		printf("NOW ENTER YOUR PROGRAM OR TEXT LINE BY LINE- ONCE YOU FINISH PRESS KEYS Ctrl+D\n");
+		
+		i=0;
+
+		ch = getchar();
+		
+		/* to remove the last newline character entered*/
+		while ( (ch=getchar()) != EOF)
+			buf[i++]=ch;
+
+		fsize=i-2;
+
+		buf[fsize]='\0';
+
+		printf("Total characters stored in your file = %d\n", fsize);
+		
+		write(fd, buf, fsize);
+/*
+Definition of function write(int, const void *buf, size_t nbytes) ===> write(file_descriptor, buffer_pointer, number_of_written_bytes)
+
+
+*/
+		
+		close(fd);
+/*
+file is closed  with close(file_descriptor) function
+*/
+	}
+	
+
+	/*
+		Opening an existing file
+	*/
+	printf("OPENING AN EXISTING FILE\n");
+	
+	printf("ENTER FILE NAME : ");
+	scanf("%s", fname);
+	
+	fd = open(fname, O_RDWR|O_APPEND, DEF_MODE);
+/*
+O_RDWR ==> says open the file so that it can be read and written.
+O_APPEND ==> append to the end of the file
+DEF_MODE is the same
+*/
+	
+	if (fd < 0)
+	{
+		printf ("cannot open FILE %s - does not exist \n", fname);
+	}
+	else
+	{
+		printf(" READING YOUR FILE CONTENTS\n");
+
+		nbytes=read(fd, buf, sizeof(buf));
+		len=strlen(buf);
+/*
+Definition of function read(fd, buf, sizeof(buf))==>  
+fd - file_descriptor
+buf(char array) - buffer for storing content of the file
+sizeof(buf) - number of bytes to read before truncating data
+*/
+
+		printf("CONTENTS OF YOUR FILE %s - size= %d\n",fname, len);
+
+		puts(buf);// printing the file content
+
+		close(fd);// file closed
+	}
+	
+
+	/*
+		Copying a file
+	*/
+	printf("COPYING A FILE \n");
+	
+	printf("ENTER NAME OF CURRENT FILE TO BE COPIED FROM :");
+	scanf("%s", fname);
+	printf("ENTER NAME OF NEW FILE NAME TO BE COPIED TO :");
+	scanf("%s", cname);
+	
+	fd = open(fname, O_RDONLY, DEF_MODE);
+/*
+firstly, the file which is to be opened is opened in read-only(O_RDONLY) mode
+*/
+	
+	if (fd < 0)
+	{
+		printf ("cannot open FILE %s - does not exist \n", fname);	
+	}
+	else
+	{
+		if(nbytes = read(fd, buf, sizeof(buf)) < 0) //negative number is returned if there is a system call error
+		{
+			printf("FILE READ ERROR\n");	
+		}
+		else
+		{
+			fd1 = open(cname, O_CREAT|O_TRUNC|O_WRONLY, DEF_MODE);
+			/*
+			THEN new file with name cname is created
+			*/
+			
+			if (fd1 < 0) // negative value is returned when an error occurs while opening file
+			{
+				printf("Cannot create New file %s\n", cname);	
+			}
+			else
+			{
+				len=strlen(buf);
+
+				if( nbytes=write(fd1, buf, len) < 0) // negative value is returned when an error occurs while writing to file
+					printf("FILE WRITE ERROR\n");
+				else
+					printf("FILE %s has been copied to %s successfully OK ......\n",fname,cname);
+				close(fd1);
+			}
+			
+			close(fd);
+		}
+	}
+	
+
+	/*
+		Renaming a file
+	*/
+	printf("RENAMING A FILE \n");
+	
+	printf("ENTER CURRENT FILE NAME :");
+	scanf("%s", fname);
+	printf("ENTER NEW FILE NAME :");
+	scanf("%s", cname);
+	printf("FILE %s has been renamed to %s OK......\n", fname, cname);
+	
+	rename(fname, cname); /*using this function the file is renamed, fname and cname are char arrays*/
+
+	
+	
+	/*
+		Deleting a file
+	*/
+	printf("DELETING A FILE \n");
+	
+	printf("ENTER FILE NAME :");
+	scanf("%s", fname);
+	
+	ch = getchar(); /* to remove the last newline character entered*/
+	
+	printf("PLEASE CONFIRM - SURE YOU WANT TO DELETE ....PRESS y/n :");
+	scanf("%c", &cf);
+	
+	if (cf == 'y')
+	{
+		unlink(fname);/* using this unlink() function the the file is deleted*/
+		printf("FILE %s deleted OK......\n", fname);
+	}
+	else
+	{
+		printf("FILE %s not deleted OK......\n", fname);	
+	}
+
+}
+/*end_of: file_oper.c================================================================================*/
+In the code above, proper comments are provided to explain file operations and Unix i/o primitives used.
+
+RESULTS AND SCREENSHOTS:
+Here should be "part1_B#1.png".
+In the screenshot above we can see how the file_oper.c is given to compilation and executed. And partially there is shown how the program works, using i/o operations.
+Here should be "part1_B#2.png" and "part1_B#3.png".
+These two screenshots above are to demonstrate how the C program went on working.
 #### C.
+a) Sample shell script. This script asks you your name, and as you press enter it shows you info about your home dir, hard disk free space and others, which are provided in the screenshot below.
+Here should be part1_C_a.png.
+______________________________________________________________________
+b) File-Line, word and byte count
+This script counts you number of characters, words and lines in the file that you specified. 
+wc -l $FNAME - counts #of lines
+wc -w $FNAME - counts #of words
+wc -c $FNAME - counts #of bytes
+The screenshot below is showing how the script went on.
+Here should be part1_C_b.png.
+______________________________________________________________________
+c) File Sorting
+This script asks you enter file name and 10 names which will be stored in this file. And the entered names are sorted in both orders(asc and desc).
+Keyword used to sort is: sort, sort -r for reverse order.
+The screenshot below is showing how the script went on.
+Here should be part1_C_c.png.
+______________________________________________________________________
+d) Examples for Conditional construct if ...then....else ...fi.
+This script gets from user the value of LONG and using the
+syntax: if [$LONG -eq 1], which means "if LONG is equal to 1" branches into two cases ls-la or ls, which show extended and short directory listing. 
+The screenshot below is showing how the script went on.
+Here should be part1_C_d.png.
+______________________________________________________________________
+e) i) while do ..... done construct
+The script shows how while-do-done loop structure works, calculating the sum of the first odd integers. Variable A here serves as an iterator for checking the limit, B and C are used to calculate the sum. And the sum is stored in variable B.
+The screenshot below is showing how the script went on.
+Here should be part1_C_e_i.png.
+______________________________________________________________________
+ii) for do .....done construct
+There are two scripts here, the first script shows how for-do-done loop structure works with the example of finding the files with the extenion .c.
+And the next script(sum100.sh) computes the sum of first 100 integers using for-do-done structure.
+The screenshots below are showing how the scripts went on.
+Here should be part1_C_e_ii.png.
+______________________________________________________________________
+iii) until do..... done construct
+The script shows how the until-do-done loop structure works, computing the factorial of the entered value n.
+The screenshot below is showing how the script went on.
+Here should be part1_C_e_iii.png.
+______________________________________________________________________
+
+f) Example for Multi-way Branch - case .....esac
+The script shows how to use Multi-way branching case...esac. The program provides you with 11 choice menu for dealing with flies or giving some info(linux version, etc).
+Branches are finished with double-semicolons(;;) which means the end of the branch. 
+And in the last choice most interesting there is *) case which means default case(any other value which is not specfified above). 
+case is finished with esac. 
+The screenshot below is showing how the script went on.
+Here should be part1_C_f_1.png and part1_C_f_2.png.
+______________________________________________________________________
+
+g) Example for Select do ....done and if ...elif ....fi constructs.
+The script shows how to use select-do-done and if-elif structres. In the string variable OPTIONS the options are specified, So that "select choice in $options" provides you menu. if-elif structure is used to find the selected option and execute proper commands. 
+The screenshot below is showing how the script went on.
+Here should be part1_C_g_1.png, part1_C_g_2.png. part1_C_g_3.png.
+______________________________________________________________________
+
+h) Passing parameters using Command Line Arguments
+The scipt demonstrates the use of command line argguments. $1 is for getting the first command line argument, and $2 is for second. THe program gets $1 and $2 as the names of the files, where the content of the file1 should be copied to file2.
+The screenshot below is showing how the script went on.
+Here should be part1_C_h.png.
+______________________________________________________________________
+
+i) Length of a string
+The script reads the string and gives the length of the string as output. ${#STR} is used to show the length of the string.
+The screenshot below is showing how the script went on.
+Here should be part1_C_i.png.
+______________________________________________________________________
+
+
+j) Use of Special Variables
+The script shows the use of special variables. 
+$0 - contains the name of the running script
+$# - contains # of command line arguments
+$@ - contains All the arguments supplied to the bash script 
+$? - contains The exit status of the most recently run process 
+$$ - contains The process ID of the current script
+$USER - contains User Name of the user running the script 
+$HOSTNAME- contains The hostname of the machine the script is running on
+$SECONDS- contains The number of seconds since the script was started
+$LINENO - contains Current line number in the Bash script
+$RANDOM - contains Random number returned by the RANDOM variable 
+The screenshot below is showing how the script went on.
+Here should be part1_C_j.png.
+______________________________________________________________________
+
+k) Using Arrays
+
+i) In this script we can see the declaration format of  the array - name=(1 2 3 4). And each element of the array is referenced like this - ${list[$I]}.
+and the array is printed out using the while loop.
+
+ii) This is the next example of using arrays. Here the maximum element is found in the given array.
+
+iii) In this script array of the size of n is created and n values are taken from input. And in this array the maximum element is found and echoed into screen.
+
+l) Procedure Invocation
+The scipt shows how the procedures are invocated and how variables are passed into them. $? this expands the exit status of the most recently executed command
+
 ### PART2
 #### A.
 91) gives all files in current directory with extension .o and its informaiton
@@ -333,10 +659,127 @@ screenshot-B2.49.png
 screenshot-B2.50.png
 #### C.
 #### D.
-#### E.
-#### F.
-#### G.
+(i) 
+SCRIPT:
+#!/bin/bash
 
+echo Enter n:
+read N
+echo Enter $N numbers:
+let K=0
+while [ $K -lt $N ]
+do 
+read VAL
+list[$K]=$VAL
+let K=$K+1
+done
+
+let MAX=${list[0]}
+let K=1
+
+while [ $K -lt $N ]
+do 
+if [ $MAX -lt ${list[$K]} ]
+then
+MAX=${list[$K]}
+fi
+let K=$K+1
+done
+
+echo MAXIMUM ELEMENT HERE IS $MAX
+
+(ii) In this script it is almost the same as in the previous script, but it checks for "greater than".
+
+(iii) 
+SCRIPT:
+...Enter values to list...
+echo ENTER KEY: 
+read KEY
+let K=0
+let INDEX=-1
+
+while [ $K -lt $N ]
+do 
+if [ $KEY -eq ${list[$K]} ]
+then
+INDEX=$K
+break
+fi
+let K=$K+1
+done
+
+if [ $INDEX -eq -1 ]
+then
+echo NOT FOUND
+else
+echo KEY ${list[$K]} FOUND IN the list 
+echo ITS position is $K starting from 0
+fi
+
+Here should be  part2e_i_ii_iii.png file.
+########################################################
+
+#### F.
+The command 'sed' was used to substitute.
+
+Scipts:
+(i)
+sed 's/.*/\U&/g' < part2q > part2ql
+echo Letters IN part2q FILE  have been UPPERCASED and stored IN part2ql FILE
+
+(ii)
+sed 's/.*/\L&/g' < part2q > part2qu
+echo Letters IN part2q FILE  have been lowercased and stored IN part2ql FILE
+
+(iii)
+cat part2q > part2qr
+sed -i '/commands/ s/the/THE/g' part2qr
+sed -i 's/commands/COMMANDS/g' part2qr
+echo In part2q the lines with word \'commnads\' found and the occurencies with \'the\' IN these lines were UPPERCASED and the words \'commands\' as well.
+
+(iv)
+cat part2q > part2m
+sed -i -e '1 d' part2m
+sed -i -e '$ d' part2m
+echo First and LAST lines are DELETED from part2m FILEs
+
+(v)
+cat part2q part2ql part2qu part2qr part2m > part2qa
+echo The contents of part2q part2ql part2qu part2qr part2m FILES were copied and pasted IN part2qa
+
+#### G.
+In this script to implement the selection menu, 'select' statement was used.
+#!/bin/bash
+
+OPTIONS='Halt init0 init6 Poweroff Reboot Shutdown'
+PS3='Choose an option: '
+
+select CHOICE in $OPTIONS
+do
+if [ $CHOICE == Halt ]
+ then
+   sudo halt
+elif [ $CHOICE == init0 ]
+ then
+   sudo init 0
+elif [ $CHOICE == init6 ]
+ then
+   sudo init 6
+elif [ $CHOICE == Poweroff ]
+ then
+   poweroff
+elif [ $CHOICE == Reboot ]
+ then
+   reboot
+elif [ $CHOICE == Shutdown ]
+ then
+   shutdown
+else echo NO such option
+fi
+done
+
+##There are results during the execution in the screenshot below 
+Here should be  part2_f&g.png file.
 #### H.
 	CODE
 /* Program using UNIX I/O primitives to perform file operations  with menu driven*/

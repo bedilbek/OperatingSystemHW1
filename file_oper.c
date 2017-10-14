@@ -1,3 +1,4 @@
+// Part 1 B source code
 /* Program using UNIX I/O primitives to perform file operations */
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,6 +9,9 @@
 #include <string.h>
 
 #define DEF_MODE S_IRUSR|S_IWUSR|S_IXUSR|S_IRGRP|S_IWGRP|S_IXGRP|S_IROTH
+ /*
+defining the permissions of the created file
+*/
 
 int main() 
 {
@@ -38,6 +42,16 @@ int main()
 	scanf("%s", fname);
 	
 	fd = open(fname, O_CREAT|O_TRUNC|O_WRONLY|O_APPEND, DEF_MODE);
+/*
+definition of function open() ====> open(const char*file_name, int oflags, mode_t mode)
+oflags ==>> defines the method(s) in which the file should be opened. Method_flags can be separated by BITWISE OR |, if many.
+mode ==>> defines the permissions of the file when created, can be separated by BITWISE OR, if many.
+O_CREAT => create the file, if doesn't exist and 3rd parameter must be present
+O_TRUNC ==> Initially clear all data from the file. It means even the file exists, data in it will be erased.
+O_WRONLY ==> The file is for write only.
+O_APPEND  ==>  Append new information to the end of the file
+
+*/
 	
 	if (fd < 0)
 	{
@@ -62,8 +76,16 @@ int main()
 		printf("Total characters stored in your file = %d\n", fsize);
 		
 		write(fd, buf, fsize);
+/*
+Definition of function write(int, const void *buf, size_t nbytes) ===> write(file_descriptor, buffer_pointer, number_of_written_bytes)
+
+
+*/
 		
 		close(fd);
+/*
+file is closed  with close(file_descriptor) function
+*/
 	}
 	
 
@@ -76,6 +98,11 @@ int main()
 	scanf("%s", fname);
 	
 	fd = open(fname, O_RDWR|O_APPEND, DEF_MODE);
+/*
+O_RDWR ==> says open the file so that it can be read and written.
+O_APPEND ==> append to the end of the file
+DEF_MODE is the same
+*/
 	
 	if (fd < 0)
 	{
@@ -85,13 +112,20 @@ int main()
 	{
 		printf(" READING YOUR FILE CONTENTS\n");
 
-		nbytes=read(fd, buf, sizeof(buf));len=strlen(buf);
+		nbytes=read(fd, buf, sizeof(buf));
+		len=strlen(buf);
+/*
+Definition of function read(fd, buf, sizeof(buf))==>  
+fd - file_descriptor
+buf(char array) - buffer for storing content of the file
+sizeof(buf) - number of bytes to read before truncating data
+*/
 
 		printf("CONTENTS OF YOUR FILE %s - size= %d\n",fname, len);
 
-		puts(buf);
+		puts(buf);// printing the file content
 
-		close(fd);
+		close(fd);// file closed
 	}
 	
 
@@ -106,6 +140,9 @@ int main()
 	scanf("%s", cname);
 	
 	fd = open(fname, O_RDONLY, DEF_MODE);
+/*
+firstly, the file which is to be opened is opened in read-only(O_RDONLY) mode
+*/
 	
 	if (fd < 0)
 	{
@@ -113,15 +150,18 @@ int main()
 	}
 	else
 	{
-		if(nbytes = read(fd, buf, sizeof(buf)) < 0)
+		if(nbytes = read(fd, buf, sizeof(buf)) < 0) //negative number is returned if there is a system call error
 		{
 			printf("FILE READ ERROR\n");	
 		}
 		else
 		{
 			fd1 = open(cname, O_CREAT|O_TRUNC|O_WRONLY, DEF_MODE);
+			/*
+			THEN new file with name cname is created
+			*/
 			
-			if (fd1 < 0)
+			if (fd1 < 0) // negative value is returned when an error occurs while opening file
 			{
 				printf("Cannot create New file %s\n", cname);	
 			}
@@ -129,7 +169,7 @@ int main()
 			{
 				len=strlen(buf);
 
-				if( nbytes=write(fd1, buf, len) < 0)
+				if( nbytes=write(fd1, buf, len) < 0) // negative value is returned when an error occurs while writing to file
 					printf("FILE WRITE ERROR\n");
 				else
 					printf("FILE %s has been copied to %s successfully OK ......\n",fname,cname);
@@ -152,7 +192,8 @@ int main()
 	scanf("%s", cname);
 	printf("FILE %s has been renamed to %s OK......\n", fname, cname);
 	
-	rename(fname, cname);
+	rename(fname, cname); /*using this function the file is renamed, fname and cname are char arrays*/
+
 	
 	
 	/*
@@ -170,7 +211,7 @@ int main()
 	
 	if (cf == 'y')
 	{
-		unlink(fname);
+		unlink(fname);/* using this unlink() function the the file is deleted*/
 		printf("FILE %s deleted OK......\n", fname);
 	}
 	else
